@@ -1,0 +1,27 @@
+<html>
+<head>
+	<script src="https://fb.me/react-0.14.7.js"></script>
+	<script src="https://fb.me/react-dom-0.14.7.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+</head>
+
+<body>
+</body>
+
+<script type="text/jsx">
+// define a react component class
+// - a component class describes a component
+// - a class must be instantiated to an object before being rendered
+var HelloWorld = React.createClass({
+	render: function() {
+		return <p>Hello world!</p>;
+	}
+});
+
+// instantiate an instance of the class
+var hwElement = React.createElement(HelloWorld);
+
+// ask react to render the instance and tell it where to place the rendered element in the DOM
+ReactDOM.render(hwElement, document.body);
+</script>
+</html>
