@@ -1,0 +1,58 @@
+<html>
+	<head>
+		<script src="https://fb.me/react-0.14.7.js"></script>
+		<script src="https://fb.me/react-dom-0.14.7.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+		<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 target">
+				</div>
+			</div>
+		</div>
+	</body>
+
+	<script type="text/jsx">
+		var Badge = React.createClass({
+			render: function () {
+				// this.props is an object with properties passed into this class
+				console.log(this.props);
+
+				// properties can be used as below:
+				return <button className="btn btn-primary" type="button">
+					{this.props.title} <span className="badge">{this.props.number}</span>
+				</button>
+			}
+		});
+
+		var Thumbnail = React.createClass({
+			render: function () {
+				return <div className="thumbnail">
+					<img src={this.props.imageUrl} />
+					<div className="caption">
+						<h3>{this.props.header}</h3>
+						<p>{this.props.description}</p>
+						<p>
+							<Badge {...this.props.badge} />
+						</p>
+					</div>
+				</div>;
+			}
+		});
+
+		var formElement = React.createElement(Thumbnail, {
+			imageUrl: 'http://icons.iconarchive.com/icons/danleech/simple/1024/android-icon.png',
+			header: 'Android...',
+			description: '...is awesome.',
+			badge: {
+				title: 'Reasons why',
+				number: 42
+			}
+		});
+
+		ReactDOM.render(formElement, document.querySelector('.target'));
+	</script>
+</html>
