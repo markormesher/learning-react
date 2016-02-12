@@ -28,6 +28,7 @@ module.exports = React.createClass({
 	render: function () {
 		var listItems = this.props.options.map(function (opt) {
 			return <ListItem
+				key={opt.value}
 				label={opt.label}
 				value={opt.value}
 				className={this.state.selectedValue === opt.value ? 'active' : ''}
