@@ -1,4 +1,6 @@
-var Badge = React.createClass({
+var React = require('react');
+
+module.exports = React.createClass({
 	render: function () {
 		// this.props is an object with properties passed into this class
 		console.log(this.props);

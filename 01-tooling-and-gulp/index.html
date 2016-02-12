@@ -1,8 +1,5 @@
 <html>
 	<head>
-		<script src="https://fb.me/react-0.14.7.js"></script>
-		<script src="https://fb.me/react-dom-0.14.7.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
 		<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
 	</head>
 
@@ -11,36 +8,6 @@
 			<div class="row target">
 			</div>
 		</div>
+		<script src="main.js"></script>
 	</body>
-
-	<script type="text/jsx">
-
-		var thumbListElement = React.createElement(ThumbnailList,
-				{
-					images: [
-						{
-
-							imageUrl: 'http://icons.iconarchive.com/icons/danleech/simple/1024/android-icon.png',
-							header: 'Android...',
-							description: '...is awesome.',
-							badge: {
-								title: 'Reasons why',
-								number: 42
-							}
-						},
-						{
-
-							imageUrl: 'http://icons.iconarchive.com/icons/danleech/simple/1024/android-icon.png',
-							header: 'Android...',
-							description: '...is awesome.',
-							badge: {
-								title: 'Reasons why',
-								number: 42
-							}
-						}
-					]
-				});
-
-		ReactDOM.render(thumbListElement, document.querySelector('.target'));
-	</script>
 </html>
