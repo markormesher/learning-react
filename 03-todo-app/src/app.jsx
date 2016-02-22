@@ -26,15 +26,15 @@ var App = React.createClass({
 	// called exactly once, when the component will be mounted to the DOM
 	componentWillMount: function () {
 		// new Firebase(...) -> create a Firebase instance with the given URL
-		var fb = new Firebase(rootUrl + 'items/');
+		this.fb = new Firebase(rootUrl + 'items/');
 
 		// bindAsObject(...) -> part of the ReactFire library, binds in two places:
 		//   this.firebaseRefs.items -> the "manager"
 		//   this.state.items -> the plain data
-		this.bindAsObject(fb, 'items');
+		this.bindAsObject(this.fb, 'items');
 
 		// called when data arrives from the FB backend
-		fb.on('value', this.handleDataLoaded);
+		this.fb.on('value', this.handleDataLoaded);
 	},
 
 	// render UI
@@ -47,11 +47,47 @@ var App = React.createClass({
 				<Header itemsStore={this.firebaseRefs.items}/>
 				<hr />
 				<List items={this.state.items} loaded={this.state.loaded}/>
+				{this.renderDeleteCompletedButton()}
+				<hr />
 			</div>
 		</div>
 	},
 
-	// when the data is loaded
+	renderDeleteCompletedButton: function () {
+		if (!this.state.loaded) {
+			return null;
+		} else {
+			// check if any are completed
+			var show = false;
+			for (var key in this.state.items) {
+				if (this.state.items[key].done) {
+					show = true;
+					break;
+				}
+			}
+			if (!show) return null;
+
+			// return button
+			return <div>
+				<hr />
+				<div className="text-center">
+					<button className="btn btn-sm btn-default" onClick={this.deleteCompleted}>
+						<i className="fa fa-trash-o"/>
+						Clear completed items
+					</button>
+				</div>
+			</div>
+		}
+	},
+
+	deleteCompleted: function () {
+		for (var key in this.state.items) {
+			if (this.state.items[key].done) {
+				this.fb.child(key).remove();
+			}
+		}
+	},
+
 	handleDataLoaded: function () {
 		this.setState({loaded: true});
 	}

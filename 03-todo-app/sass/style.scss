@@ -9,11 +9,11 @@ ul {
 li {
 	font-size: 1.2em;
 	list-style-type: none;
+}
 
-	i {
-		margin-right: 8px;
-		color: #c0c0c0;
-	}
+li i, button i {
+	margin-right: 8px;
+	color: #c0c0c0;
 }
 
 li.task i {

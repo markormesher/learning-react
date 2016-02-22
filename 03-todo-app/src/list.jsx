@@ -21,7 +21,7 @@ module.exports = React.createClass({
 			// empty
 			return <li className="empty">
 				<i className="fa fa-thumbs-o-up"/>
-				You have nothing to do!
+				You have no tasks!
 			</li>
 
 		} else {
