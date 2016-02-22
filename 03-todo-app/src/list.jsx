@@ -1,5 +1,7 @@
 var React = require('react');
 
+var ListItem = require('./list-item');
+
 module.exports = React.createClass({
 	render: function () {
 		return <ul>
@@ -14,23 +16,25 @@ module.exports = React.createClass({
 				<i className="fa fa-spinner fa-pulse"/>
 				Loading
 			</li>
-		} else if (Object.keys(this.props.items).length === 0) {
-			// empty (or still loading)
-			return <li className="empty">You have nothing to do!</li>
+
+		} else if (!Object.keys(this.props.items).length) {
+			// empty
+			return <li className="empty">
+				<i className="fa fa-thumbs-o-up"/>
+				You have nothing to do!
+			</li>
+
 		} else {
-			// list
+			// render list
 			var output = [];
 			for (var key in this.props.items) {
-				// get item
-				if (!this.props.items.hasOwnProperty(key)) continue;
+				// get item and assign key
 				var item = this.props.items[key];
+				item.key = key;
 
 				// create UI
 				output.push(
-					<li key={key} className={item.done ? 'done' : ''}>
-						<i className="fa fa-square-o"/>
-						<span>{item.text}</span>
-					</li>
+					<ListItem key={key} item={item}/>
 				);
 			}
 			return output;
