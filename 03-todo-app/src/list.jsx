@@ -10,14 +10,14 @@ module.exports = React.createClass({
 	},
 
 	renderList: function () {
-		if (!this.props.loaded || !this.props.items) {
+		if (!this.props.loaded) {
 			// no data loaded yet
 			return <li className="loading">
 				<i className="fa fa-spinner fa-pulse"/>
 				Loading
 			</li>
 
-		} else if (!Object.keys(this.props.items).length) {
+		} else if (!this.props.items || !Object.keys(this.props.items).length) {
 			// empty
 			return <li className="empty">
 				<i className="fa fa-thumbs-o-up"/>

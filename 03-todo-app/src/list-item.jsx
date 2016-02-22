@@ -17,13 +17,18 @@ module.exports = React.createClass({
 	},
 
 	render: function () {
-		return <li className={'task' + (this.state.done ? ' done' : '')} onClick={this.handleClick}>
-			<i className="fa fa-square-o"/>
+		var deleteButton = this.state.done ?
+			<i className="fa fa-trash-o" onClick={this.handleDeleteClick}/> :
+			null;
+
+		return <li className={'task' + (this.state.done ? ' done' : '')}>
+			<i className="fa fa-square-o" onClick={this.handleCheckClick}/>
+			{deleteButton}
 			<span>{this.state.text}</span>
 		</li>
 	},
 
-	handleClick: function () {
+	handleCheckClick: function () {
 		var newDone = !this.state.done;
 
 		// change state
@@ -33,5 +38,9 @@ module.exports = React.createClass({
 
 		// update on backend
 		this.fb.update({done: newDone});
+	},
+
+	handleDeleteClick: function () {
+		this.fb.remove();
 	}
 });
