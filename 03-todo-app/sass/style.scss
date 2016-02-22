@@ -1,16 +1,26 @@
-.black {
-	color: black
-}
-
 .container {
 	margin-top: 15px;
 }
 
+ul {
+	padding: 0;
+}
+
 li {
 	font-size: 1.2em;
+	list-style-type: none;
+
+	i {
+		margin-right: 8px;
+		color: #c0c0c0;
+	}
 }
 
 li.empty {
-	list-style-type: none;
 	text-align: center;
+}
+
+li.loading {
+	text-align: center;
+	opacity: 0.5;
 }

@@ -14,7 +14,10 @@ var rootUrl = 'https://popping-torch-2380.firebaseio.com/';
 var App = React.createClass({
 	// blank state
 	getInitialState: function () {
-		return {items: {}};
+		return {
+			items: {},
+			loaded: false
+		};
 	},
 
 	// copy all properties from ReactFire to this component
@@ -23,10 +26,15 @@ var App = React.createClass({
 	// called exactly once, when the component will be mounted to the DOM
 	componentWillMount: function () {
 		// new Firebase(...) -> create a Firebase instance with the given URL
+		var fb = new Firebase(rootUrl + 'items/');
+
 		// bindAsObject(...) -> part of the ReactFire library, binds in two places:
 		//   this.firebaseRefs.items -> the "manager"
 		//   this.state.items -> the plain data
-		this.bindAsObject(new Firebase(rootUrl + 'items/'), 'items');
+		this.bindAsObject(fb, 'items');
+
+		// called when data arrives from the FB backend
+		fb.on('value', this.handleDataLoaded);
 	},
 
 	// render UI
@@ -36,11 +44,16 @@ var App = React.createClass({
 		return <div className="row panel panel-default">
 			<div className="col-md-8 col-md-offset-2">
 				<h2 className="text-center">Todo List</h2>
-				<Header itemsStore={this.firebaseRefs.items} />
+				<Header itemsStore={this.firebaseRefs.items}/>
 				<hr />
-				<List items={this.state.items} />
+				<List items={this.state.items} loaded={this.state.loaded}/>
 			</div>
 		</div>
+	},
+
+	// when the data is loaded
+	handleDataLoaded: function () {
+		this.setState({loaded: true});
 	}
 });
 

@@ -8,7 +8,13 @@ module.exports = React.createClass({
 	},
 
 	renderList: function () {
-		if (this.props.items && Object.keys(this.props.items).length === 0) {
+		if (!this.props.loaded || !this.props.items) {
+			// no data loaded yet
+			return <li className="loading">
+				<i className="fa fa-spinner fa-pulse"/>
+				Loading
+			</li>
+		} else if (Object.keys(this.props.items).length === 0) {
 			// empty (or still loading)
 			return <li className="empty">You have nothing to do!</li>
 		} else {
@@ -22,6 +28,7 @@ module.exports = React.createClass({
 				// create UI
 				output.push(
 					<li key={key}>
+						<i className="fa fa-square-o"/>
 						{item.text}
 					</li>
 				);
