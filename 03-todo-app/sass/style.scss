@@ -24,3 +24,11 @@ li.loading {
 	text-align: center;
 	opacity: 0.5;
 }
+
+li.done {
+	opacity: 0.5;
+
+	span {
+		text-decoration: line-through;
+	}
+}

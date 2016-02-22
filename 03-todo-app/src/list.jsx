@@ -27,9 +27,9 @@ module.exports = React.createClass({
 
 				// create UI
 				output.push(
-					<li key={key}>
+					<li key={key} className={item.done ? 'done' : ''}>
 						<i className="fa fa-square-o"/>
-						{item.text}
+						<span>{item.text}</span>
 					</li>
 				);
 			}
